@@ -20,7 +20,7 @@ def image_download(folder, obj, url):
         images = soup.findAll("img", class_="serp-item__thumb justifier__thumb")
         for image in images:
             if counter == 1000:
-                return None
+                return
             image_url = f"https:{image.get('src')}"
             filename = f"{counter:04d}.jpg"
             picture = requests.get(image_url, HEADERS)
