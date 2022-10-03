@@ -1,40 +1,35 @@
 from bs4 import BeautifulSoup
 import requests
 import os
-HEADERS = {"User-Agent": "KH"}
+HEADERS = {"User-Agent": "Mozilla/5.0"}
 directory = os.getcwd()
 
 
-def image_download(folder, obj):
+def image_download(folder, obj, url):
     os.chdir(directory)
-    try:
-        os.mkdir(folder)
-    except IOError:
-        pass
+    os.mkdir(folder)
     os.chdir(directory + '\\' + folder)
 
     page = 0
     counter = 0
     while counter < 1000:
         print(page)
-        url = f"https://yandex.ru/images/search?p={page}&text={obj}"
+        url = f"{url}?p={page}&text={obj}"
         r = requests.get(url, HEADERS)
         soup = BeautifulSoup(r.text, "lxml")
-        image_need = 0
         images = soup.findAll("img", class_="serp-item__thumb justifier__thumb")
         for image in images:
             if counter == 1000:
                 return None
-            image_url = "https:" + image.get("src")
-            filename = str(counter).rjust(4, '0') + ".jpg"
+            image_url = f"https:{image.get('src')}"
+            filename = f"{counter:04d}.jpg"
             picture = requests.get(image_url, HEADERS)
-            direct = open(filename, 'wb')
-            direct.write(picture.content)
-            direct.close()
-            counter = counter + 1
-            image_need = image_need + 1
-        page = page + 1
+            with open(filename, 'wb') as f:
+                f.write(picture.content)
+            counter += 1
+        page += 1
 
 
-image_download('dog', 'dog')
-image_download('cat', 'cat')
+if __name__ == "__main__":
+    image_download('dog', 'dog', "https://yandex.ru/images/search")
+    image_download('cat', 'cat', "https://yandex.ru/images/search")
