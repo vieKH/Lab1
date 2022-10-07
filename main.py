@@ -24,7 +24,7 @@ def create_file(folder):
 def image_download(folder, obj, url, counter):
     """Эта функция для скачать фото
     Из библиотеки request получить код содержать фото
-    Мз библиотеки BS4 поменять код в lxml, поиск адресс фото и скачать их
+    Из библиотеки BS4 поменять код в lxml, поиск адресс фото и скачать их
     :param folder: имена папки
     :param obj: объект который вы хотите найти
     :param url: адресс страница ( В задаче https://yandex.ru/images/search?...)
