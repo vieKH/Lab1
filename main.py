@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import os
 import logging
-
 HEADERS = {"User-Agent": "Mozilla/5.0 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
            "Accept-Language": "en-US, ru-RU", "Accept-Encoding": "grip, deflate", "Connection": "keep-alive", "one": "true"}
 directory = os.getcwd()
@@ -25,7 +24,7 @@ def create_file(folder):
 def image_download(folder, obj, url, counter):
     """Эта функция для скачать фото
     Из библиотеки request получить код содержать фото
-    Мз библиотеки BS4 поменять код в lxml, поиск адресс фото и скачать их
+    Из библиотеки BS4 поменять код в lxml, поиск адресс фото и скачать их
     :param folder: имена папки
     :param obj: объект который вы хотите найти
     :param url: адресс страница ( В задаче https://yandex.ru/images/search?...)
