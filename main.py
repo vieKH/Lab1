@@ -1,5 +1,5 @@
 import multiprocessing
-
+import timeit
 
 def cal_pi(value: int):
     pi = 0
@@ -21,3 +21,4 @@ if __name__ == '__main__':
     p1.start()
     p1.join()
     print("Done!")
+    timeit.timeit(cal_pi, number=500)
